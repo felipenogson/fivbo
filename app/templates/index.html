@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block login %}
+{% if current_user.is_anonymous %}
+{{ super() }}
+{% else %}
+<section class="download bg-primary text-center" id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h2 class="section-heading">Login Succesful</h2>
+        <p>Welcome {{ current_user.username }}</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block app %}
+{% if current_user.is_anonymous %}
+{{ super() }}
+{% else %}
+
+<section class="features" id="features">
+  <div class="container">
+    <h1>Expense Tracker</h1>
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card text-center h-100">
+          <div class="card-header">
+            <h3>Add New Transaction</h3>
+          </div>
+          <div class="card-body">
+            <form id="transactionForm">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Amount</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                  </div>
+                  <input type="number" class="form-control" id="transactionAmount"
+                    aria-label="Amount (to the nearest dollar)" aria-describedby="amountHelp">
+                </div>
+                <small id="amountHelp" class="form-text text-muted">Negative: expense, Positive:
+                  income</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Text</label>
+                <input type="Text" class="form-control" id="transactionText" placeholder="Add a note...">
+              </div>
+              <button class="btn btn-warning btn-lg">Add Transaction</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card text-center h-100">
+          <div class="card-header">
+            <h3>Your balance</h3>
+          </div>
+          <div class="card-body">
+            <h3 class="display-3 mb-2" id="balance">$0.00</h3>
+          </div>
+          <div class="row" style="padding: 20px">
+            <div class="col-sm-6">
+              <div class="card border-success">
+                <div class="card-body">
+                  <h3 class="card-title">Income</h3>
+                  <h1 id="money-plus">$ 00.00</h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card border-danger">
+                <div class="card-body">
+                  <h3 class="card-title">Expense</h3>
+                  <h1 id="money-minus">$ 00.00</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-lg-12">
+        <div class="card text-center h-100">
+          <div class="card-header">
+            <h3>History</h3>
+          </div>
+          <div class="card-body">
+            <div class="container">
+              <ul id="historyList" class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span>McDonalds</span>
+                  <span>$100</span>
+                  <span class="badge badge-danger badge-pill"><i class="fa fa-window-close"
+                      aria-hidden="true"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span>McDonalds</span>
+                  <span>$100</span>
+                  <span class="badge badge-danger badge-pill"><i class="fa fa-window-close"
+                      aria-hidden="true"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span>McDonalds</span>
+                  <span>$100</span>
+                  <span aria-hidden="true">&times;</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src=" {{ url_for( 'static', filename='/js/expense-tracker.js') }}"></script>
+{% endif %}
+{% endblock %}
