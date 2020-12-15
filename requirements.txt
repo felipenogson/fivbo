@@ -7,3 +7,4 @@ WTForms==2.3.3
 Flask_WTF==0.14.3
 python-dotenv==0.15.0
 email-validator==1.1.2
+gunicorn==20.0.4
