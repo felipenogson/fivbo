@@ -5,7 +5,7 @@ app.db
 env/
 venv/
 .flaskenv
-app.db
+*.db
 
 *.py[cod]
 
