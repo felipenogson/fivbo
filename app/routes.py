@@ -9,7 +9,8 @@ from werkzeug.urls import url_parse
 @app.route('/')
 @app.route('/index')
 def index():
-    form = LoginForm()
+    login_form = LoginForm()
+    register_form = RegistrationForm()
     posts = [
         {
             'author': {'username': 'John'},
@@ -20,7 +21,7 @@ def index():
             'body': 'The Avengers movie was so cool!'
         }
     ]
-    return render_template('index.html', title='Home', posts=posts, form=form)
+    return render_template('index.html', title='Home', posts=posts, login_form=login_form, register_form=register_form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -52,10 +53,13 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
+        if form.invitation_code.data != "cat":
+            flash('Sorry, registering is by invitation right now', 'danger')
+            return redirect(url_for('index')) 
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('Congratulations, you are now a registered user')
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form)
+        flash('Congratulations, you are now a registered user', 'success')
+        return redirect(url_for('index'))
+    return redirect(url_for('index'))
