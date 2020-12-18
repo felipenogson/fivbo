@@ -72,17 +72,18 @@
 
   <header class="masthead">
 
-  {% with messages = get_flashed_messages(with_categories=true) %}
-  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
-  {% if messages %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+    {% if messages %}
     {% for category, message in messages %}
-      <div class="alert alert-{{ category }} alert-dismissible container" role="alert" style="top:4rem; z-index: 1000">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div class="alert alert-{{ category }} alert-dismissible container" role="alert" style="top:4rem; z-index: 1000">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+          aria-hidden="true">&times;</span></button>
       <!-- <strong>Title</strong> --> {{ message }}
-      </div>
+    </div>
     {% endfor %}
-  {% endif %}
-{% endwith %}
+    {% endif %}
+    {% endwith %}
 
     <div class="container h-100">
       <div class="row h-100">
@@ -197,8 +198,45 @@
   <section class="cta">
     <div class="cta-content">
       <div class="container">
-        <h2>Stop waiting.<br>Start saving.</h2>
-        <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Let's Get Started!</a>
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Stop waiting.<br>Start saving.</h2>
+            <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Let's Get Started!</a>
+          </div>
+          <div class="col-md-6">
+            <div class="card border-white" id="register_card">
+              <div class="card-body">
+                <form action="/register" method="POST">
+                  {{ register_form.hidden_tag() }}
+                  <div class="form-group">
+                    <label for="InputUsername">Username</label>
+                    {{ register_form.username(class_="form-control", placeholder="Username", id="InputUsername")}}
+                  </div>
+                  <div class="form-group">
+                    <label for="InputEmail">Email</label>
+                    {{ register_form.email(class_="form-control", placeholder="Email address", id="InputEmail")}}
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                      else.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="Password1">Password</label>
+                    {{ register_form.password(class_="form-control", placeholder="Select Password", id="Password1")}}
+                  </div>
+                  <div class="form-group">
+                    <label for="Password2">Repeat Password</label>
+                    {{ register_form.password2(class_="form-control", placeholder="Select Password", id="Password2")}}
+                  </div>
+                  <div class="form-group">
+                    <label for="InputCode">Invitation code</label>
+                    {{ register_form.invitation_code(class_="form-control", placeholder="Invitation Code", id="invitationCode")}}
+                    <small id="invitationHelp" class="form-text text-muted">Sorry, the registration is only by invitation right now. <a  class="js-scroll-trigger" href="#contact">Send us a message!</a></small>
+                  </div>
+                  {{ register_form.submit( class_="btn btn-primary") }}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="overlay"></div>
@@ -271,20 +309,20 @@
 
           <p>The data is yours, access it from any device</p>
           <form action="/login" method="post" class="text-left mx-auto" id="login_form">
-            {{ form.hidden_tag() }}
+            {{ login_form.hidden_tag() }}
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>
-              {{ form.username(class_="form-control") }}
+              {{ login_form.username(class_="form-control", id="login_username") }}
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
-              {{ form.password(class_="form-control")}}
+              {{ login_form.password(class_="form-control", id="login_password")}}
             </div>
             <div class="mb-3 form-check">
-              {{ form.remember_me(class_="form-check-input") }}
-              {{ form.remember_me.label(class_="form-check-label") }}
+              {{ login_form.remember_me(class_="form-check-input") }}
+              {{ login_form.remember_me.label(class_="form-check-label") }}
             </div>
-            {{ form.submit(class_="btn btn-danger btn-lg")}}
+            {{ login_form.submit(class_="btn btn-danger btn-lg", id="login_btn")}}
           </form>
         </div>
       </div>
