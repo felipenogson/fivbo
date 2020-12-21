@@ -27,7 +27,7 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('app'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -37,7 +37,7 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('app')
         return redirect(next_page)
     # return render_template('login.html',  title='Sign In', form=form)
     return redirect(url_for('index'))
@@ -50,17 +50,26 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    register_form = RegistrationForm()
+    login_form = LoginForm()
+
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        if form.invitation_code.data != "cat":
+
+    if register_form.validate_on_submit():
+        if register_form.invitation_code.data != "cat":
             flash('Sorry, registering is by invitation right now', 'danger')
             return redirect(url_for('index')) 
-        user = User(username=form.username.data, email=form.email.data)
-        user.set_password(form.password.data)
+        user = User(username=register_form.username.data, email=register_form.email.data)
+        user.set_password(register_form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user', 'success')
-        return redirect(url_for('index'))
-    return redirect(url_for('index'))
+        login_user(user)
+        return redirect(url_for('app'))
+    return render_template('register.html', title="Registration Form", register_form=register_form, login_form=login_form)
+
+@app.route('/app')
+@login_required
+def app():
+    return render_template('app.html')

@@ -1,38 +1,208 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-    <h1>Register</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.username.label }} <br>
-            {{ form.username(size=32) }} <br>
-            {% for error in form.username.errors %}
-            <span style="color: red">[{{ error }} ]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.email.label }} <br>
-            {{ form.email(size=64) }} <br>
-            {% for error in form.email.errors %}
-            <span style="color: red">[{{ error }} ]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }} <br>
-            {{ form.password(size=32) }} <br>
-            {% for error in form.password.errors %}
-            <span style="color: red">[{{ error }} ]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password2.label }} <br>
-            {{ form.password2(size=32) }} <br>
-            {% for error in form.password2.errors %}
-            <span style="color: red">[{{ error }} ]</span>
-            {% endfor %}
-        </p>
-        <p> {{ form.submit() }}</p>
-    </form>
+<head>
 
-{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title> Fivbo - Financial Visualitation Board</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css') }}">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='device-mockups/device-mockups.min.css') }}">
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/new-age.css') }}" rel="stylesheet">
+
+  <!-- My own style -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Fivbo</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/">Home</a>
+          </li>
+          {% if current_user.is_anonymous %}
+          <li class="nav-item">
+            <!-- Button trigger modal -->
+            <a class="nav-link" data-toggle="modal" data-target="#loginModal" href="#">Login</a>
+          </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+          </li>
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="/logout">Logout</a>
+          </li>
+          {% endif %}
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section class="cta" id="registration">
+    <div class="cta-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Stop waiting.<br>Start saving.<br> Register Now</h2>
+          </div>
+          <div class="col-md-6">
+            <div class="card border-white" id="register_card">
+              <div class="card-body">
+                <form action="/register" method="POST">
+                  {{ register_form.hidden_tag() }}
+                  <div class="form-group">
+                    <label for="InputUsername">Username</label>
+                    {{ register_form.username(class_="form-control", placeholder="Username", id="InputUsername")}}
+                  </div>
+                  <div class="form-group">
+                    <label for="InputEmail">Email</label>
+                    {{ register_form.email(class_="form-control", placeholder="Email address", id="InputEmail")}}
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                      else.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="Password1">Password</label>
+                    {{ register_form.password(class_="form-control", placeholder="Select Password", id="Password1")}}
+                  </div>
+                  <div class="form-group">
+                    <label for="Password2">Repeat Password</label>
+                    {{ register_form.password2(class_="form-control", placeholder="Select Password", id="Password2")}}
+                  </div>
+                  <div class="form-group">
+                    <label for="InputCode">Invitation code</label>
+                    {{ register_form.invitation_code(class_="form-control", placeholder="Invitation Code", id="invitationCode")}}
+                    <small id="invitationHelp" class="form-text text-muted">Sorry, the registration is only by invitation right now. <a  class="js-scroll-trigger" href="#contact">Send us a message!</a></small>
+                  </div>
+                  {{ register_form.submit( class_="btn btn-primary") }}
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overlay"></div>
+  </section>
+
+
+  <section class="contact bg-primary" id="contact">
+    <div class="container">
+      <h2>We
+        <i class="fas fa-heart"></i>
+        new friends!</h2>
+      <ul class="list-inline list-social">
+        <li class="list-inline-item social-twitter">
+          <a href="https://twitter.com/fivbo">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li class="list-inline-item social-facebook">
+          <a href="#">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="list-inline-item social-google-plus">
+          <a href="#">
+            <i class="fab fa-google-plus-g"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; Fivbo 2020. All Rights Reserved.</p>
+      <ul class="list-inline">
+        <li class="list-inline-item">
+          <a href="#">Privacy</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#">Terms</a>
+        </li>
+        <li class="list-inline-item">
+          <a href="#">FAQ</a>
+        </li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{{ url_for('static', filename='js/new-age.min.js') }}"></script>
+
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <p>The data is yours, access it from any device</p>
+          <form action="/login" method="post" class="text-left mx-auto" id="login_form">
+            {{ login_form.hidden_tag() }}
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              {{ login_form.username(class_="form-control", id="login_username") }}
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              {{ login_form.password(class_="form-control", id="login_password")}}
+            </div>
+            <div class="mb-3 form-check">
+              {{ login_form.remember_me(class_="form-check-input") }}
+              {{ login_form.remember_me.label(class_="form-check-label") }}
+            </div>
+            {{ login_form.submit(class_="btn btn-danger btn-lg", id="login_btn")}}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
