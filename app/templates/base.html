@@ -47,15 +47,18 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
 
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#features">Features</a>
+          </li>
           {% if current_user.is_anonymous %}
           <li class="nav-item">
             <!-- Button trigger modal -->
             <a class="nav-link" data-toggle="modal" data-target="#loginModal" href="#">Login</a>
           </li>
-          {% endif %}
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#features">Features</a>
+            <a class="nav-link js-scroll-trigger" href="/register">Register</a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
           </li>
@@ -92,7 +95,7 @@
             <h1 class="mb5">Financial Vision Board</h1>
             <h2 class="mb-5">You need motivation to start adopting better money habits, this board, will remind you to
               stay on track with your financial goals.</h2>
-            <a href="#download" class="btn btn-outline btn-xl js-scroll-trigger">Start Saving Now!</a>
+            <a href="{{ url_for('app') }}" class="btn btn-outline btn-xl js-scroll-trigger">Start Saving Now!</a>
           </div>
         </div>
         <div class="col-lg-5 my-auto">
@@ -195,52 +198,6 @@
   </section>
   {% endblock %}
 
-  <section class="cta">
-    <div class="cta-content">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h2>Stop waiting.<br>Start saving.</h2>
-            <a href="#contact" class="btn btn-outline btn-xl js-scroll-trigger">Let's Get Started!</a>
-          </div>
-          <div class="col-md-6">
-            <div class="card border-white" id="register_card">
-              <div class="card-body">
-                <form action="/register" method="POST">
-                  {{ register_form.hidden_tag() }}
-                  <div class="form-group">
-                    <label for="InputUsername">Username</label>
-                    {{ register_form.username(class_="form-control", placeholder="Username", id="InputUsername")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="InputEmail">Email</label>
-                    {{ register_form.email(class_="form-control", placeholder="Email address", id="InputEmail")}}
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                      else.</small>
-                  </div>
-                  <div class="form-group">
-                    <label for="Password1">Password</label>
-                    {{ register_form.password(class_="form-control", placeholder="Select Password", id="Password1")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="Password2">Repeat Password</label>
-                    {{ register_form.password2(class_="form-control", placeholder="Select Password", id="Password2")}}
-                  </div>
-                  <div class="form-group">
-                    <label for="InputCode">Invitation code</label>
-                    {{ register_form.invitation_code(class_="form-control", placeholder="Invitation Code", id="invitationCode")}}
-                    <small id="invitationHelp" class="form-text text-muted">Sorry, the registration is only by invitation right now. <a  class="js-scroll-trigger" href="#contact">Send us a message!</a></small>
-                  </div>
-                  {{ register_form.submit( class_="btn btn-primary") }}
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="overlay"></div>
-  </section>
 
   <section class="contact bg-primary" id="contact">
     <div class="container">
@@ -318,10 +275,15 @@
               <label for="password" class="form-label">Password</label>
               {{ login_form.password(class_="form-control", id="login_password")}}
             </div>
-            <div class="mb-3 form-check">
+            <div class="row">
+            <div class="col-lg-6 mb-3 form-check">
               {{ login_form.remember_me(class_="form-check-input") }}
               {{ login_form.remember_me.label(class_="form-check-label") }}
             </div>
+            <div class="col-lg-6">
+              Do not have an account? <a href="/register">Register</a>
+            </div>
+
             {{ login_form.submit(class_="btn btn-danger btn-lg", id="login_btn")}}
           </form>
         </div>

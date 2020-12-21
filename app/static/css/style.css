@@ -8,7 +8,7 @@
     font-size: 30px;
 }
 #historyList {
-   #historyList-style-type: none;
+    list-style-type: none;
     padding: 0;
     margin-bottom: 40px;
 }
@@ -49,6 +49,14 @@
 
 #historyList li:hover .delete-btn  {
     opacity: 1;
+}
+
+#registration{
+  padding-top: 50px;
+}
+#register_card{
+  border-radius: 30px;
+  padding: 20px;
 }
 .fade-in {
 	-webkit-animation: fade-in 1.2s ease-in-out 2s both;
