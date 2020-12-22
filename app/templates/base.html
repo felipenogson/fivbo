@@ -48,7 +48,7 @@
         <ul class="navbar-nav ml-auto">
 
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#features">Features</a>
+            <a class="nav-link js-scroll-trigger" href="/#features">Features</a>
           </li>
           {% if current_user.is_anonymous %}
           <li class="nav-item">
@@ -72,9 +72,7 @@
       </div>
     </div>
   </nav>
-
-  <header class="masthead">
-
+  <div class="container">
     {% with messages = get_flashed_messages(with_categories=true) %}
     <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
     {% if messages %}
@@ -87,115 +85,9 @@
     {% endfor %}
     {% endif %}
     {% endwith %}
+  </div>
 
-    <div class="container h-100">
-      <div class="row h-100">
-        <div class="col-lg-7 my-auto">
-          <div class="header-content mx-auto">
-            <h1 class="mb5">Financial Vision Board</h1>
-            <h2 class="mb-5">You need motivation to start adopting better money habits, this board, will remind you to
-              stay on track with your financial goals.</h2>
-            <a href="{{ url_for('app') }}" class="btn btn-outline btn-xl js-scroll-trigger">Start Saving Now!</a>
-          </div>
-        </div>
-        <div class="col-lg-5 my-auto">
-          <div class="device-container">
-            <div class="device-mockup iphone6_plus portrait white">
-              <div class="device">
-                <div class="screen">
-                  <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                  <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
-                  <img
-                    src="https://images.pexels.com/photos/4386321/pexels-photo-4386321.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                    class="h-100 img-fluid" alt="">
-                </div>
-                <div class="button">
-                  <!-- You can hook the "home button" to some JavaScript events or just remove it -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <section class="download bg-primary">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 mx-auto">
-          <h3 class="section-heading">Sure, it may sound corny, but it works. Just ask <a
-              href="https://www.marketwatch.com/story/this-woman-paid-off-20000-in-debt-by-making-a-first-payment-of-20-2017-09-29"
-              style="color:black">this author</a>, who paid off $20,000 of debt after realizing that taking control of
-            her finances was a way to value herself.</h3>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  {% block app %}
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-heading text-center">
-        <h2>Unlimited Features, Unlimited Savings</h2>
-        <p class="text-muted">Check out what you can do with this app !</p>
-        <hr>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 my-auto">
-          <div class="device-container">
-            <div class="device-mockup iphone6_plus portrait white">
-              <div class="device">
-                <div class="screen">
-                  <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-                  <img src="img/demo-screen-1.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="button">
-                  <!-- You can hook the "home button" to some JavaScript events or just remove it -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-8 my-auto">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="feature-item">
-                  <i class="icon-pie-chart text-primary"></i>
-                  <h3>Track your spends</h3>
-                  <p class="text-muted">Get charts and knowledge of where your money goes.</p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="feature-item">
-                  <i class="icon-location-pin text-primary"></i>
-                  <h3>Map you money</h3>
-                  <p class="text-muted">Put a pin on a map and more information on your money transactions!</p>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="feature-item">
-                  <i class="icon-screen-smartphone text-primary"></i>
-                  <h3>Set a budget</h3>
-                  <p class="text-muted">This is the starting point for every other goal in your life. </p>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="feature-item">
-                  <i class="icon-lock-open text-primary"></i>
-                  <h3>Open Source</h3>
-                  <p class="text-muted">Since this app is MIT licensed, you can be sure that the information is
-                    completly yours!</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  {% block content %}
   {% endblock %}
 
 
@@ -211,13 +103,8 @@
           </a>
         </li>
         <li class="list-inline-item social-facebook">
-          <a href="#">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-        </li>
-        <li class="list-inline-item social-google-plus">
-          <a href="#">
-            <i class="fab fa-google-plus-g"></i>
+          <a href="mailto:felipe@nogson.com?subject=Fivbo Comment">
+            <i class="fa fa-envelope" aria-hidden="true"></i>
           </a>
         </li>
       </ul>

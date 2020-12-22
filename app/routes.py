@@ -72,4 +72,5 @@ def register():
 @app.route('/app')
 @login_required
 def app():
-    return render_template('app.html')
+    login_form = LoginForm()
+    return render_template('app.html', title="FivboAPP", login_form=login_form)
