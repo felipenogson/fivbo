@@ -1,83 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title> Fivbo - Financial Visualitation Board</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-
-  <!-- Custom fonts for this template -->
-  <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/simple-line-icons/css/simple-line-icons.css') }}">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
-
-  <!-- Plugin CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='device-mockups/device-mockups.min.css') }}">
-
-  <!-- Custom styles for this template -->
-  <link href="{{ url_for('static', filename='css/new-age.css') }}" rel="stylesheet">
-
-  <!-- My own style -->
-  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Fivbo</a>
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-        aria-label="Toggle navigation">
-        Menu
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#features">Transactions</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
-          </li>
-          {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="/logout">Logout</a>
-          </li>
-          {% endif %}
-
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
-    {% if messages %}
-    {% for category, message in messages %}
-    <div class="alert alert-{{ category }} alert-dismissible container" role="alert" style="top:4rem; z-index: 1000">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-          aria-hidden="true">&times;</span></button>
-      <!-- <strong>Title</strong> --> {{ message }}
-    </div>
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-
-
+{% block content %}
 <section class="features" id="features">
   <div class="container">
     <h1>Expense Tracker</h1>
@@ -96,7 +19,7 @@
                     <span class="input-group-text">$</span>
                   </div>
                   <input type="number" class="form-control" id="transactionAmount"
-                    aria-label="Amount (to the nearest dollar)" aria-describedby="amountHelp" step=".01" autocomplete="off">
+                    aria-label="Amount (to the nearest dollar)" aria-describedby="amountHelp" step=".01" autocomplete="off" value='-0'>
                 </div>
                 <small id="amountHelp" class="form-text text-muted">Negative: expense, Positive:
                   income</small>
@@ -176,60 +99,4 @@
   </div>
 </section>
 <script src=" {{ url_for( 'static', filename='/js/expense-tracker.js') }}"></script>
-
-  <section class="contact bg-primary" id="contact">
-    <div class="container">
-      <h2>We
-        <i class="fas fa-heart"></i>
-        new friends!</h2>
-      <ul class="list-inline list-social">
-        <li class="list-inline-item social-twitter">
-          <a href="https://twitter.com/fivbo">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </li>
-        <li class="list-inline-item social-facebook">
-          <a href="#">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-        </li>
-        <li class="list-inline-item social-google-plus">
-          <a href="#">
-            <i class="fab fa-google-plus-g"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container">
-      <p>&copy; Fivbo 2020. All Rights Reserved.</p>
-      <ul class="list-inline">
-        <li class="list-inline-item">
-          <a href="#">Privacy</a>
-        </li>
-        <li class="list-inline-item">
-          <a href="#">Terms</a>
-        </li>
-        <li class="list-inline-item">
-          <a href="#">FAQ</a>
-        </li>
-      </ul>
-    </div>
-  </footer>
-
-  <!-- Bootstrap core JavaScript -->
-  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="{{ url_for('static', filename='vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="{{ url_for('static', filename='js/new-age.min.js') }}"></script>
-
-
-</body>
-
-</html>
+{% endblock %}
