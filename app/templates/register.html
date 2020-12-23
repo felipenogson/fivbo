@@ -11,7 +11,7 @@
           <div class="col-md-6">
             <div class="card border-white" id="register_card">
               <div class="card-body">
-                <form action="/register" method="POST">
+                <form action="{{ url_for('register') }}" method="POST">
                   {{ register_form.hidden_tag() }}
                   <div class="form-group">
                     <label for="InputUsername">Username</label>

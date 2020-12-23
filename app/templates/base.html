@@ -155,7 +155,7 @@
         <div class="modal-body">
 
           <p>The data is yours, access it from any device</p>
-          <form action="/login" method="post" class="text-left mx-auto" id="login_form">
+          <form action="{{ url_for('login') }}" method="post" class="text-left mx-auto" id="login_form">
             {{ login_form.hidden_tag() }}
             <div class="mb-3">
               <label for="username" class="form-label">Username</label>

@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, send_from_directory
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -11,17 +11,7 @@ from werkzeug.urls import url_parse
 def index():
     login_form = LoginForm()
     register_form = RegistrationForm()
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', title='Home', posts=posts, login_form=login_form, register_form=register_form)
+    return render_template('index.html', title='Home', login_form=login_form, register_form=register_form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -66,11 +56,16 @@ def register():
         db.session.commit()
         flash('Congratulations, you are now a registered user', 'success')
         login_user(user)
-        return redirect(url_for('app'))
+        return redirect(url_for('application'))
     return render_template('register.html', title="Registration Form", register_form=register_form, login_form=login_form)
 
 @app.route('/app')
 @login_required
-def app():
+def application():
     login_form = LoginForm()
     return render_template('app.html', title="FivboAPP", login_form=login_form)
+
+# Esta ruta es para servir los javascript por medio de la aplicacion ya sea por http o https
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('js', path )

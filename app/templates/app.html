@@ -109,7 +109,7 @@
     </div>
   </div>
 </section>
-<script src=" {{ url_for( 'static', filename='/js/expense-tracker.js') }}"></script>
+<script src=" {{ url_for( 'send_js', path='expense-tracker.js') }}"></script>
 {% endblock %}
 {% block map %}
 
@@ -123,6 +123,6 @@
   <script
   src="https://maps.googleapis.com/maps/api/js?libraries=places,drawing,geometry&key=AIzaSyAQZqaQdWQ-DE8BVYw9ksLZ6TgflsczlzA&callback=initMap"
   defer></script>
-<script src=" {{ url_for( 'static', filename='/js/mapScript.js') }}"></script>
+<script src="{{ url_for( 'send_js', path='mapScript.js') }}"></script>
 </section>
 {% endblock %}
