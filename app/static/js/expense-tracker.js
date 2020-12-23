@@ -29,7 +29,8 @@ function addTransaction(e){
     const transaction = {
       id: generateID(),
       text: text.value,
-      amount: +amount.value
+      amount: +amount.value,
+      location: currentLatLng
     };
   transactions.push(transaction);
   addTransactionDOM(transaction);

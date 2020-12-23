@@ -58,6 +58,10 @@
   border-radius: 30px;
   padding: 20px;
 }
+
+#map {
+  height: 80vh;
+}
 .fade-in {
 	-webkit-animation: fade-in 1.2s ease-in-out 2s both;
 	        animation: fade-in 1.2s ease-in-out 2s both;

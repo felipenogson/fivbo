@@ -100,3 +100,18 @@
 </section>
 <script src=" {{ url_for( 'static', filename='/js/expense-tracker.js') }}"></script>
 {% endblock %}
+{% block map %}
+
+<section class="bg-success map">
+  <div class="container-fluid">
+    <div class="col-md-12">
+      <div id="mapError"></div>
+      <div id="map"></div>
+    </div>
+  </div>
+  <script
+  src="https://maps.googleapis.com/maps/api/js?libraries=places,drawing,geometry&key=AIzaSyAQZqaQdWQ-DE8BVYw9ksLZ6TgflsczlzA&callback=initMap"
+  defer></script>
+<script src=" {{ url_for( 'static', filename='/js/mapScript.js') }}"></script>
+</section>
+{% endblock %}
