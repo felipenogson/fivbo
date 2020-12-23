@@ -26,14 +26,24 @@ function addTransaction(e){
   if(text.value.trim() === ''  || amount.value.trim() === ''){
     alert('Please add a text and amount')
   }else{
+    var category = document.getElementById('expenseCategory').value != '' ? document.getElementById('expenseCategory').value : 'General';
+    var location = document.getElementById('locationAutocomplete').value != '' ? document.getElementById('locationAutocomplete').value : 'Undefined';
     const transaction = {
       id: generateID(),
+      category: category,
       text: text.value,
-      amount: +amount.value
+      amount: +amount.value,
+      position: currentLatLng,
+      location: location
     };
+
+    document.getElementById('locationAutocomplete').value = '';
+  // Add the transaction to the map from mapScript 
+  markTransaction(transaction)
   transactions.push(transaction);
   addTransactionDOM(transaction);
   updateValues();
+  showTransactions();
   updateLocalStorage();
 
 
@@ -70,8 +80,8 @@ function updateValues(){
   const amounts = transactions.map( transaction => transaction.amount);
 
   const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
-  console.log(total);
 
+// Calculate the values for income and expense with the help of javascript list functions
   const income = amounts
     .filter(item => item > 0)
     .reduce((acc, item) => (acc += item), 0)
