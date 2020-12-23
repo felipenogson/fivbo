@@ -38,7 +38,7 @@ function currentLocation(position){
     var lat =  position.coords.latitude;
     var lng = position.coords.longitude;
     currentLatLng = {lat:lat, lng:lng};
-    console.log(currentLatLng);
+    // console.log(currentLatLng);
     map.setCenter(new google.maps.LatLng(lat, lng));
     }
 
