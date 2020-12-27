@@ -24,7 +24,9 @@ function initMap(){
 
     var locationAutocomplete = new google.maps.places.Autocomplete(
         document.getElementById('locationAutocomplete'), 
-        { types: ['establishment']}
+        { types: ['establishment'],
+          location: currentLatLng,
+          radius: 100, }
     )
 
     if(markers.length != 0){
@@ -38,7 +40,7 @@ function currentLocation(position){
     var lat =  position.coords.latitude;
     var lng = position.coords.longitude;
     currentLatLng = {lat:lat, lng:lng};
-    // console.log(currentLatLng);
+    console.log(currentLatLng);
     map.setCenter(new google.maps.LatLng(lat, lng));
     }
 
