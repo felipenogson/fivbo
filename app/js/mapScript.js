@@ -2,6 +2,7 @@ console.log('Inicio')
 var map;
 var markers = [];
 var currentLatLng = "unavailable";
+var accuracy = "unavilable";
 var mapError =  document.getElementById('mapError');
 
 function initMap(){
@@ -15,6 +16,7 @@ function initMap(){
     
     if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition(currentLocation, showError);
+        
     } else {
 
         mapError.innerHTML = `<div class="alert alert-warning" role="alert">
@@ -22,12 +24,6 @@ function initMap(){
                             </div>`
     }
 
-    var locationAutocomplete = new google.maps.places.Autocomplete(
-        document.getElementById('locationAutocomplete'), 
-        { types: ['establishment'],
-          location: currentLatLng,
-          radius: 100, }
-    )
 
     if(markers.length != 0){
         markTransactions();
@@ -39,9 +35,22 @@ function initMap(){
 function currentLocation(position){
     var lat =  position.coords.latitude;
     var lng = position.coords.longitude;
+    var accuracy = position.coords.accuracy;
+
     currentLatLng = {lat:lat, lng:lng};
-    console.log(currentLatLng);
     map.setCenter(new google.maps.LatLng(lat, lng));
+
+    var circle = new google.maps.Circle(
+        { center : currentLatLng, radius: accuracy}
+        )
+
+    var locationAutocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('locationAutocomplete'), 
+        { types: ['establishment'],
+          }
+    )
+    console.log(circle.getBounds());
+    locationAutocomplete.setBounds(circle.getBounds());
     }
 
 
