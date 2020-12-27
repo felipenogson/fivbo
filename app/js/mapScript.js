@@ -43,14 +43,17 @@ function currentLocation(position){
     var circle = new google.maps.Circle(
         { center : currentLatLng, radius: accuracy * 5 }
         )
+    var bounds = circle.getBounds();
 
+    console.log(circle);
     var locationAutocomplete = new google.maps.places.Autocomplete(
         document.getElementById('locationAutocomplete'), 
         { types: ['establishment'],
-          bounds: circle,
+          bounds: bounds,
           strictBounds: true,
           }
     )
+
     }
 
 
