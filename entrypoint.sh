@@ -8,9 +8,11 @@
 #     flask db migrate -m "first database migrate"
 #     flask db upgrade
 # fi
-flask db init
-flask db migrate -m "first database migrate"
-flask db upgrade
+if [! -f 'fivbo.db' ]; then
+    flask db init
+    flask db migrate -m "first database migrate"
+    flask db upgrade
+fi
 
 gunicorn -b 0.0.0.0:8000 app:app
 
