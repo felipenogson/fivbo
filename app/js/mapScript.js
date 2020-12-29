@@ -1,4 +1,3 @@
-console.log('Inicio')
 var map;
 var markers = [];
 var currentLatLng = "unavailable";
@@ -45,12 +44,10 @@ function currentLocation(position){
         )
     var bounds = circle.getBounds();
 
-    console.log(circle);
     var locationAutocomplete = new google.maps.places.Autocomplete(
         document.getElementById('locationAutocomplete'), 
         { types: ['establishment'],
           bounds: bounds,
-          strictBounds: true,
           }
     )
 
