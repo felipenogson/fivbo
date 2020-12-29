@@ -1,4 +1,3 @@
-console.log('Inicio')
 var map;
 var markers = [];
 var currentLatLng = "unavailable";
@@ -41,16 +40,17 @@ function currentLocation(position){
     map.setCenter(new google.maps.LatLng(lat, lng));
 
     var circle = new google.maps.Circle(
-        { center : currentLatLng, radius: accuracy}
+        { center : currentLatLng, radius: accuracy * 5 }
         )
+    var bounds = circle.getBounds();
 
     var locationAutocomplete = new google.maps.places.Autocomplete(
         document.getElementById('locationAutocomplete'), 
         { types: ['establishment'],
+          bounds: bounds,
           }
     )
-    console.log(circle.getBounds());
-    locationAutocomplete.setBounds(circle.getBounds());
+
     }
 
 
